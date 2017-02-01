@@ -1,0 +1,35 @@
+{
+  "name": "wwise_plugin_manager",
+  "version": "0.1.0",
+  "main": "main.js",
+  "devDependencies": {
+    "bootstrap": "^3.3.7",
+    "electron": "^1.4.15",
+    "electron-packager": "^8.5.1",
+    "fs-jetpack": "^0.10.5",
+    "gulp": "^3.9.1",
+    "jquery": "^3.1.1",
+    "nunjucks": "^3.0.0"
+  },
+  "description": "Manages installing wwise plugins",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "electron": "^1.4.15",
+    "electron-connect": "^0.6.1",
+    "fs-jetpack": "^0.10.5",
+    "jquery": "^3.1.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Enzien Audio Ltd",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/enzienaudio/wwise-plugin-manager.git"
+  },
+  "bugs": {
+    "url": "https://github.com/enzienaudio/wwise-plugin-manager/issues"
+  },
+  "homepage": "https://github.com/enzienaudio/wwise-plugin-manager#readme"
+}

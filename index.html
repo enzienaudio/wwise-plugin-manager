@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Wwise Plugin Manager</title>
+    <!-- <link href="./static/css/styles.css" rel="stylesheet"> -->
+    <link href="./static/css/style.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <!-- <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"> -->
+  </head>
+
+  <body>
+    <div class="jumbotron text-center"><h1>Wwise Plugins</h1></div>
+    <div id="wwise" class="container"></div>
+  </body>
+
+  <script>
+    window.$ = window.jQuery = require('jquery')
+    require('bootstrap')
+    require("electron-connect").client.create()
+
+    var renderer = require('./renderer.js')
+
+    $(document).ready(function() {
+      renderer.refresh();
+    })
+  </script>
+</html>
