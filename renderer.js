@@ -56,7 +56,7 @@ exports.refresh = function() {
       $.each(jetpack.list(AkDir + dirName + wwisePluginPath), function (i, pluginName) {
         if (~pluginName.indexOf("Hv_") && path.extname(pluginName) === ".dll") {
           let type = (~pluginName.indexOf("Source")) ? " (Source)" : " (FX)"
-          app.append("<li class=\"list-group-item\">" + pluginName.split("_")[1] + type + "<a href=\"\"><i class=\"glyphicon-trash pull-right\"></i></a></li>")
+          app.append("<li class=\"list-group-item\">" + pluginName.split("_")[1] + type + "<a href=\"\"><i class=\"glyphicon glyphicon-trash pull-right\"></i></a></li>")
         }
       })
 
