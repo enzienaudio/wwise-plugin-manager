@@ -1,4 +1,35 @@
+.wwiseheader {
+  background-color: #c5c6c6;
+  height: 2px;
+}
 
-.dragarea {
-  background-color: #FBF5E6;
+.drop-area {
+  border: 1px solid #fafafa;
+  background-color: #fafafa;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.drop-area:hover {
+  border: 2px dotted #d1e5d5;
+}
+
+.drop-text {
+  text-align: center;
+  font-size: 14px;
+  pointer-events: none;
+}
+
+.jumbotron {
+  background-color:#d1e5d5;
+}
+
+.footer {
+  background-color: #c5c6c6;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
