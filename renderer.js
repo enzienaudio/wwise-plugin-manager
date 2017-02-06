@@ -6,21 +6,25 @@ document.ondragover = document.ondrop = (ev) => {
   ev.preventDefault()
 }
 
-document.body.ondrop = (ev) => {
-  console.log(ev.getElementById("holder1"))
+// document.body.ondrop = (ev) => {
+//   console.log(ev.getElementById("holder1"))
 
-  let akPluginDir = "/Applications/Audiokinetic/Wwise 2016.1.0.5775/Wwise.app/Contents/SharedSupport/Wwise2016/support/wwise/drive_c/Program Files/Audiokinetic/Wwise/Authoring/Win32/Release/bin/plugins"
-  let droppedFile = ev.dataTransfer.files[0].path
+//   let akPluginDir = "/Applications/Audiokinetic/Wwise 2016.1.0.5775/Wwise.app/Contents/SharedSupport/Wwise2016/support/wwise/drive_c/Program Files/Audiokinetic/Wwise/Authoring/Win32/Release/bin/plugins"
+//   let droppedFile = ev.dataTransfer.files[0].path
 
-  if ([".xml", ".dll"].indexOf(path.extname(droppedFile)) >= 0) {
-    let filename = path.basename(droppedFile, path.extname(droppedFile))
-    jetpack.copy(path.dirname(droppedFile), akPluginDir, {
-      matching: [filename + ".xml", filename + ".dll"],
-      overwrite: true})
+//   if ([".xml", ".dll"].indexOf(path.extname(droppedFile)) >= 0) {
+//     let filename = path.basename(droppedFile, path.extname(droppedFile))
+//     jetpack.copy(path.dirname(droppedFile), akPluginDir, {
+//       matching: [filename + ".xml", filename + ".dll"],
+//       overwrite: true})
 
-    this.refresh()
-  }
-  ev.preventDefault()
+//     this.refresh()
+//   }
+//   ev.preventDefault()
+// }
+
+exports.ondrop = function(id, path) {
+
 }
 
 exports.refresh = function() {
@@ -40,7 +44,7 @@ exports.refresh = function() {
     if (~dirName.indexOf("Wwise")) {
       let row1 = $("<div class=\"row\"/>")
       row1.append("<div class=\"col\"><h3>" + dirName + "</h3></div>")
-      row1.append("<div class=\"dragarea\" id=\"holder" + i + "\">Drop here</div>")
+      row1.append("<div class=\"dnd-area\" id=\"holder" + i + "\"><div class=\"dnd-text\"> <i class=\"fi-page-copy\" style=\"font-size:25px;\"></i><br>Drop here</div></div>")
       row1.appendTo(wwiseDiv)
 
       let row2 = $("<div class=\"row\"><h4>Installed Plugins:</h4></div>")
@@ -60,4 +64,11 @@ exports.refresh = function() {
       row3.appendTo(wwiseDiv)
     }
   })
+
+  // rebind
+  document.getElementById("holder1").addEventListener('drop', (ev) => {
+    console.log(ev.dataTransfer.files[0].path)
+    ev.preventDefault()
+  })
+
 };

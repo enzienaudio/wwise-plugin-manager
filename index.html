@@ -3,14 +3,22 @@
   <head>
     <meta charset="UTF-8">
     <title>Wwise Plugin Manager</title>
-    <!-- <link href="./static/css/styles.css" rel="stylesheet"> -->
-    <link href="./static/css/style.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <!-- <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"> -->
+    <link href="./static/css/style.css" rel="stylesheet">
   </head>
 
   <body>
     <div class="jumbotron text-center"><h1>Wwise Plugins</h1></div>
+    <div class="container">
+      <div class="row">
+        <div id="dnd" class="col-md-6 dnd-area">
+            <div class="dnd-text">
+                <!-- <i class="fi-page-copy" style="font-size:25px;"></i><br> -->
+                Click open <br>or drag and drop<br>a folder or <br> a patch here!
+            </div>
+        </div>
+      </div>
+    </div>
     <div id="wwise" class="container"></div>
   </body>
 
