@@ -3,24 +3,26 @@
   "version": "0.1.0",
   "main": "main.js",
   "devDependencies": {
-    "bootstrap": "^3.3.7",
     "electron": "^1.4.15",
-    "electron-packager": "^8.5.1",
-    "fs-jetpack": "^0.10.5",
-    "gulp": "^3.9.1",
-    "jquery": "^3.1.1",
-    "nunjucks": "^3.0.0"
+    "electron-builder": "^12.3.1",
+    "electron-connect": "^0.6.1",
+    "gulp": "^3.9.1"
   },
-  "description": "Manages installing wwise plugins",
+  "bundledDependencies": {
+    "bootstrap": "^3.3.7",
+    "fs-jetpack": "^0.10.5",
+    "jquery": "^3.1.1"
+  },
+  "description": "Desktop app to manage Wwise plugins",
   "dependencies": {
     "bootstrap": "^3.3.7",
-    "electron": "^1.4.15",
-    "electron-connect": "^0.6.1",
     "fs-jetpack": "^0.10.5",
     "jquery": "^3.1.1"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "pack": "build --dir",
+    "dist": "build",
+    "postinstall": "install-app-deps"
   },
   "author": "Enzien Audio Ltd",
   "license": "ISC",
