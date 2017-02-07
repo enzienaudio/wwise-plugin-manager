@@ -18,14 +18,14 @@ $(document).on("dragover drop", function (e) {
 var wwiseplug = exports
 
 wwiseplug.get_app_dir = function() {
-  return (process.platform === "darwin") ? "/Applications/Audiokinetic/" : "C:/Programs/"
+  return (process.platform === "darwin") ? "/Applications/Audiokinetic/" : "C:\\Program Files (x86)\\Audiokinetic\\"
 }
 
 wwiseplug.get_rel_plugin_dir = function() {
   if (process.platform === "darwin") {
     return "/Wwise.app/Contents/SharedSupport/Wwise2016/support/wwise/drive_c/Program Files/Audiokinetic/Wwise/Authoring/Win32/Release/bin/plugins"
   } else {
-    return "/Authoring/x64/Release/bin/plugins"
+    return "\\Authoring\\x64\\Release\\bin\\plugins"
   }
 }
 
@@ -35,7 +35,7 @@ wwiseplug.get_plugin_dir = function(wwise_version) {
 
 wwiseplug.add_plugin = function(plugin_path, wwise_version) {
   if ([".xml", ".dll"].indexOf(path.extname(plugin_path)) >= 0) {
-    console.log(String.format("Installing {0} to {1}", path.basename(plugin_path), wwise_version))
+    //console.log(String.format("Installing {0} to {1}", path.basename(plugin_path), wwise_version))
     let filename = path.basename(plugin_path, path.extname(plugin_path))
     jetpack.copy(path.dirname(plugin_path), this.get_plugin_dir(wwise_version), {
       matching: [filename + ".xml", filename + ".dll"],
@@ -44,7 +44,7 @@ wwiseplug.add_plugin = function(plugin_path, wwise_version) {
     console.error(String.format("{0} not a valid Wwise plugin", plugin_path))
   }
 
-  // Note:(joe) this apparently should be done but doesn't seem to work,
+  // Note:(joe) this apparently should be done for the mac authoring app but doesn't seem to work,
   // or actually make a difference keeping around in case we need to come back to it.
   // exec(
   //   "./bin/wineprefixcreate --snapshot", {
@@ -69,7 +69,7 @@ wwiseplug.remove_plugin = function(plugin_name, wwise_version) {
     let plug_dir = this.get_plugin_dir(wwise_version)
     let plug_name = path.basename(plugin_name, path.extname(plugin_name))
 
-    console.log(String.format("Removing {0} from {1}", plugin_name, wwise_version))
+    //console.log(String.format("Removing {0} from {1}", plugin_name, wwise_version))
 
     jetpack.remove(path.format({ dir: plug_dir, name: plug_name, ext: ".xml"}))
     jetpack.remove(path.format({ dir: plug_dir, name: plug_name, ext: ".dll"}))
@@ -82,9 +82,13 @@ wwiseplug.refresh = function() {
   container.html("") // clear container
 
   // generate list of all wwise application directories
-  let wwise_apps = jetpack.list(this.get_app_dir()).reverse().filter(function (x) {
-    return (~x.indexOf("Wwise"))
-  })
+  let wwise_apps = jetpack.list(this.get_app_dir())
+
+  if (typeof wwise_apps !== "undefined") {
+    wwise_apps = wwise_apps.reverse().filter(function (x) {
+      return (~x.indexOf("Wwise") && (x.indexOf("Wwise Launcher")))
+    })
+  }
 
   $.each(wwise_apps, function(i, dirName) {
 
@@ -122,9 +126,13 @@ wwiseplug.refresh = function() {
     let table_body = $("<tbody/>")
 
     // generate list of installed heavy plugins
-    plugins = jetpack.list(wwiseplug.get_plugin_dir(dirName)).filter(function (x) {
-      return (~x.indexOf("Hv_") && path.extname(x) === ".dll")
-    })
+    plugins = jetpack.list(wwiseplug.get_plugin_dir(dirName))
+
+    if (typeof plugins !== "undefined") {
+      plugins = plugins.filter(function (x) {
+        return (~x.indexOf("Hv_") && path.extname(x) === ".dll")
+      })
+    }
 
     $.each(plugins, function(i, pluginName) {
 
